@@ -7,5 +7,14 @@ services:
     volumes:
     - ./:/usr/share/nginx/html
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    ports:
-    - 80:80
+    labels:
+    - "traefik.port=80"
+    - "traefik.frontend.rule=Host:html.virtualsync.net"
+    networks:
+    - mynet
+
+
+networks:
+  mynet:
+    external:
+      name: proxy-server-network
